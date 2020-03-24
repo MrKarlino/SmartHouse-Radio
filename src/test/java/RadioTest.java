@@ -6,7 +6,7 @@ class RadioTest {
 
     @Test
     void setStationWithinLimit() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
 
         int expected = 3;
         radio.setCurrentStation(3);
@@ -16,7 +16,7 @@ class RadioTest {
 
     @Test
     void setCurrentStationUnderLimit() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
 
         int expected = 0;
         radio.setCurrentStation(-1);
@@ -57,7 +57,7 @@ class RadioTest {
 
     @Test
     void testNextStation() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         int minStation = 0;
         radio.setCurrentStation(minStation);
         radio.nextStation();
@@ -103,7 +103,7 @@ class RadioTest {
 
     @Test
     void testIncreaseVolume() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         int expected = Radio.MIN_VOLUME + 1;
         radio.setVolume(Radio.MIN_VOLUME);
         radio.increaseVolume();
@@ -113,7 +113,7 @@ class RadioTest {
 
     @Test
     void testIncreaseVolumeOverLimit() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         int expected = Radio.MAX_VOLUME;
         radio.setVolume(Radio.MAX_VOLUME);
         radio.increaseVolume();
@@ -123,7 +123,7 @@ class RadioTest {
 
     @Test
     void testDecreaseVolume() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         int expected = Radio.MAX_VOLUME - 1;
         radio.setVolume(Radio.MAX_VOLUME);
         radio.decreaseVolume();
@@ -133,7 +133,7 @@ class RadioTest {
 
     @Test
     void testDecreaseVolumeUnderLimit() {
-        Radio radio = new Radio(10);
+        Radio radio = new Radio();
         int expected = Radio.MIN_VOLUME;
         radio.setVolume(Radio.MIN_VOLUME);
         radio.decreaseVolume();
