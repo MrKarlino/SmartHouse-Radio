@@ -26,17 +26,17 @@ class RadioTest {
 
     @Test
     void setCurrentStationOverLimit() {
-        Radio radio = new Radio();
-
-        int expected = 9;
-        radio.setCurrentStation(10);
+        int maxStation = 10;
+        Radio radio = new Radio(maxStation);
+        int expected = maxStation;
+        radio.setCurrentStation(maxStation + 1);
         int actual = radio.getCurrentStation();
         assertEquals(actual, expected);
     }
 
     @Test
-    void setCurrentStationAtLoverLimit() {
-        Radio radio = new Radio();
+    void setCurrentStationAtLowerLimit() {
+        Radio radio = new Radio(10);
         int minStation = 0;
 
         int expected = minStation;
@@ -47,9 +47,8 @@ class RadioTest {
 
     @Test
     void setCurrentStationAtUpperLimit() {
-        Radio radio = new Radio();
-        int maxStation = 9;
-
+        int maxStation = 10;
+        Radio radio = new Radio(maxStation);
         int expected = maxStation;
         radio.setCurrentStation(maxStation);
         int actual = radio.getCurrentStation();
@@ -69,8 +68,8 @@ class RadioTest {
 
     @Test
     void testNextStationOverLimit() {
-        Radio radio = new Radio();
-        int maxStation = 9;
+        int maxStation = 10;
+        Radio radio = new Radio(maxStation);
         int minStation = 0;
         radio.setCurrentStation(maxStation);
         radio.nextStation();
@@ -81,8 +80,8 @@ class RadioTest {
 
     @Test
     void testPrevStation() {
-        Radio radio = new Radio();
-        int maxStation = 9;
+        int maxStation = 10;
+        Radio radio = new Radio(maxStation);
         radio.setCurrentStation(maxStation);
         radio.prevStation();
         int expected = maxStation - 1;
@@ -92,9 +91,9 @@ class RadioTest {
 
     @Test
     void testPrevStationUnderLimit() {
-        Radio radio = new Radio();
+        int maxStation = 10;
+        Radio radio = new Radio(maxStation);
         int minStation = 0;
-        int maxStation = 9;
         radio.setCurrentStation(minStation);
         radio.prevStation();
         int expected = maxStation;
@@ -105,9 +104,8 @@ class RadioTest {
     @Test
     void testIncreaseVolume() {
         Radio radio = new Radio();
-        int minVolume = 0;
-        int expected = minVolume + 1;
-        radio.setVolume(minVolume);
+        int expected = Radio.MIN_VOLUME + 1;
+        radio.setVolume(Radio.MIN_VOLUME);
         radio.increaseVolume();
         int actual = radio.getVolume();
         assertEquals(expected, actual);
@@ -116,9 +114,8 @@ class RadioTest {
     @Test
     void testIncreaseVolumeOverLimit() {
         Radio radio = new Radio();
-        int maxVolume = 10;
-        int expected = maxVolume;
-        radio.setVolume(maxVolume);
+        int expected = Radio.MAX_VOLUME;
+        radio.setVolume(Radio.MAX_VOLUME);
         radio.increaseVolume();
         int actual = radio.getVolume();
         assertEquals(actual, expected);
@@ -127,9 +124,8 @@ class RadioTest {
     @Test
     void testDecreaseVolume() {
         Radio radio = new Radio();
-        int maxVolume = 10;
-        int expected = maxVolume - 1;
-        radio.setVolume(maxVolume);
+        int expected = Radio.MAX_VOLUME - 1;
+        radio.setVolume(Radio.MAX_VOLUME);
         radio.decreaseVolume();
         int actual = radio.getVolume();
         assertEquals(expected, actual);
@@ -138,9 +134,8 @@ class RadioTest {
     @Test
     void testDecreaseVolumeUnderLimit() {
         Radio radio = new Radio();
-        int minVolume = 0;
-        int expected = minVolume;
-        radio.setVolume(minVolume);
+        int expected = Radio.MIN_VOLUME;
+        radio.setVolume(Radio.MIN_VOLUME);
         radio.decreaseVolume();
         int actual = radio.getVolume();
         assertEquals(expected, actual);
